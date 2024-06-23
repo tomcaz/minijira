@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Counter } from "./components/counter/Counter";
+
+import "bootstrap/dist/css/bootstrap.min.css"
 import RequestForm from "./components/request-form/request";
 
 export default function IndexPage() {

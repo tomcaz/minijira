@@ -50,8 +50,13 @@
   text-decoration: underline;
 }
 
+.link:visited {
+  text-decoration: none;
+}
+
 .link {
-  color: #704cb6;
+  color: white;
+  font-weight: bold;
 }
 
 .link.active {
@@ -68,9 +73,11 @@
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(10px);
   }
+
   100% {
     transform: translateY(0px);
   }
