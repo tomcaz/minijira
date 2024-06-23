@@ -1,6 +1,8 @@
 'use client'
+import { faRemove, faUpload } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { Button, Col, Container, Form, Row } from 'react-bootstrap'
+import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
 import { useFieldArray, useForm } from 'react-hook-form'
 
 const RequestForm = () => {
@@ -51,20 +53,27 @@ const RequestForm = () => {
                       <Form.Control type="email" placeholder="john@srf.com" />
                     </Form.Group>
                     <label className='label'>Tag : </label>
-                    {['UI', 'Backend', 'Performance'].map((type) => (
-                      <div className="mb-3">
+                    <div className="mb-3">
+                      {['UI', 'Backend', 'Performance'].map((type) => (
                         <Form.Check type='checkbox'
                           id='issue-type'
                           label={type}
                         />
-                      </div>))}
+                      ))}
+                    </div>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
                     <Form.Group className="mb-3" controlId="email">
                       <Form.Label className='label'>Step(s) to Reporduce : </Form.Label>
-                      <Form.Control type="text" placeholder="Type 'Enter' for a new step" onKeyDown={addStep} />
+
+                      <InputGroup className="mb-3">
+                        <Form.Control type="text" placeholder="Type 'Enter' for a new step" onKeyDown={addStep} />
+                        <Button variant="outline-secondary" id="button-addon2">
+                          Add
+                        </Button>
+                      </InputGroup>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -77,8 +86,8 @@ const RequestForm = () => {
                             <Col md={9}>
                               <Form.Control key={field.id} {...field} onChange={() => { }} />
                             </Col>
-                            <Col md={{ span: 2, offset: 1 }}>
-                              <Button style={{ float: 'right' }} type='button' onClick={() => remove(index)}>Remove</Button>
+                            <Col md={{ span: 1, offset: 2 }}>
+                              <Button variant='danger' style={{ float: 'right' }} type='button' onClick={() => remove(index)}><FontAwesomeIcon icon={faRemove} /></Button>
                             </Col>
                           </Row>
                         </li>
@@ -88,7 +97,7 @@ const RequestForm = () => {
                 </Row>
                 <Row>
                   <Col>
-                    <Button style={{ float: 'right' }} type='button'>Submit</Button>
+                    <Button style={{ float: 'right' }} type='button'><FontAwesomeIcon icon={faUpload} /> Submit</Button>
                   </Col>
                 </Row>
               </Form>
