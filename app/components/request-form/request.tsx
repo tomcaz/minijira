@@ -7,7 +7,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 
 const RequestForm = () => {
 
-  const { control } = useForm()
+  const { control, register } = useForm()
   const { append, remove, fields } = useFieldArray({
     name: 'steps', control, rules: {
       minLength: 1
@@ -19,7 +19,7 @@ const RequestForm = () => {
       const text = e.nativeEvent.target.value
       if (text.trim() !== '') {
         e.nativeEvent.target.value = ''
-        append({ value: text })
+        append({ defaultValue: text })
       }
     }
   }
@@ -41,6 +41,7 @@ const RequestForm = () => {
                     <div className="mb-3">
                       {['Bug Report', 'Feature Request', 'General Inquiry'].map((type) => (
                         <Form.Check type='checkbox'
+                          key={type}
                           id='issue-type'
                           label={type}
                         />
@@ -56,6 +57,7 @@ const RequestForm = () => {
                     <div className="mb-3">
                       {['UI', 'Backend', 'Performance'].map((type) => (
                         <Form.Check type='checkbox'
+                          key={type}
                           id='issue-type'
                           label={type}
                         />
@@ -84,7 +86,7 @@ const RequestForm = () => {
                         <li>
                           <Row>
                             <Col md={9}>
-                              <Form.Control key={field.id} {...field} onChange={() => { }} />
+                              <Form.Control key={field.id} {...field} />
                             </Col>
                             <Col md={{ span: 1, offset: 2 }}>
                               <Button variant='danger' style={{ float: 'right' }} type='button' onClick={() => remove(index)}><FontAwesomeIcon icon={faRemove} /></Button>
