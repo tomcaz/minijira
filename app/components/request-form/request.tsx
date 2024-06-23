@@ -1,8 +1,27 @@
 'use client'
 import React from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
+import { useFieldArray, useForm } from 'react-hook-form'
 
 const RequestForm = () => {
+
+  const { control } = useForm()
+  const { append, remove, fields } = useFieldArray({
+    name: 'steps', control, rules: {
+      minLength: 1
+    }
+  })
+
+  const addStep = (e: any) => {
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      const text = e.nativeEvent.target.value
+      if (text.trim() !== '') {
+        e.nativeEvent.target.value = ''
+        append({ value: text })
+      }
+    }
+  }
+
   return (
     <>
       <Container>
@@ -45,20 +64,31 @@ const RequestForm = () => {
                   <Col>
                     <Form.Group className="mb-3" controlId="email">
                       <Form.Label className='label'>Step(s) to Reporduce : </Form.Label>
-                      <Form.Control type="text" placeholder="Type 'Enter' for a new step" />
+                      <Form.Control type="text" placeholder="Type 'Enter' for a new step" onKeyDown={addStep} />
                     </Form.Group>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
                     <ol>
-
+                      {fields.map((field, index) => (
+                        <li>
+                          <Row>
+                            <Col md={9}>
+                              <Form.Control key={field.id} {...field} onChange={() => { }} />
+                            </Col>
+                            <Col md={{ span: 2, offset: 1 }}>
+                              <Button style={{ float: 'right' }} type='button' onClick={() => remove(index)}>Remove</Button>
+                            </Col>
+                          </Row>
+                        </li>
+                      ))}
                     </ol>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    <Button style={{ float: 'right' }} type='submit'>Submit</Button>
+                    <Button style={{ float: 'right' }} type='button'>Submit</Button>
                   </Col>
                 </Row>
               </Form>
