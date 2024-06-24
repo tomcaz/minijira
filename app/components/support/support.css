@@ -1,0 +1,39 @@
+.link {
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+}
+
+.link:hover {
+    background-color: purple;
+    color: white;
+    padding-left: 12px;
+}
+
+.link.active {
+    background-color: blueviolet;
+    color: white;
+    padding-left: 12px;
+}
+
+.empty {
+    border: 1px solid #CCC;
+    min-height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.embendded {
+    background-color: #CCC;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    padding: 16px 16px;
+    overflow-y: auto;
+    max-height: 400px;
+}

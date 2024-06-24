@@ -17,15 +17,20 @@ export const supportSlice = createAppSlice({
     initialState,
     reducers: (create) => ({
         create: create.reducer((state, action: PayloadAction<SupportType>) => {
+            console.log('created')
             state.supports = [...state.supports, {
                 ...action.payload,
                 id: uuidv4()
             }
             ];
+            console.log(state.supports)
         }),
         update: create.reducer((state, action: PayloadAction<SupportType>) => {
             state.supports = [...state.supports.filter(support => support.id !== action.payload.id),
-            action.payload,
+            {
+                ...state.supports.filter(support => support.id === action.payload.id)[0],
+                ...action.payload
+            }, // update partially
             ];
         }),
         deleteSupport: create.reducer((state, action: PayloadAction<string>) => {

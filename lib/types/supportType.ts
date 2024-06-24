@@ -1,10 +1,10 @@
 type SupportType = {
-    id: string,
+    id?: string,
     fullName: string,
     email: string,
     issueType: IssueType,
     tags: TagsType[],
-    stepsToReporduce: []
+    stepsToReporduce: StepType[]
 }
 
 enum IssueType {
@@ -17,4 +17,9 @@ enum TagsType {
     UI = "UI",
     BACKEND = "Backend",
     PERFORMANCE = "Performance"
+}
+
+type StepType = {
+    id: string,
+    step: string
 }
