@@ -15,14 +15,14 @@ export const Nav = () => {
         href="/"
       >
         Request A Support
-      </Link>
+      </Link> |
       <Link
         className={`${styles.link} ${
-          pathname === "/verify" ? styles.active : ""
+          pathname === "/supports" ? styles.active : ""
         }`}
-        href="/verify"
+        href="/supports"
       >
-        Requests
+        Supports
       </Link>
     </nav>
   );

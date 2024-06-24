@@ -60,7 +60,7 @@
 }
 
 .link.active {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {
