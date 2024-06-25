@@ -14,7 +14,7 @@ const Success = () => {
     useEffect(() => {
         if (lastId && lastId !== undefined) {
             setItem(supports.filter(i => i.id === lastId)[0])
-            // dispatch(clearLastId())
+            dispatch(clearLastId())
         }
     }, [lastId])
     return (
