@@ -5,11 +5,12 @@ import { v4 as uuidv4 } from 'uuid';
 export interface SupportSliceState {
     supports: SupportType[];
     status: "idle" | "loading" | "failed";
+    lastId?: string
 }
 
 const initialState: SupportSliceState = {
     supports: [],
-    status: "idle",
+    status: "idle"
 };
 
 export const supportSlice = createAppSlice({
@@ -17,13 +18,13 @@ export const supportSlice = createAppSlice({
     initialState,
     reducers: (create) => ({
         create: create.reducer((state, action: PayloadAction<SupportType>) => {
-            console.log('created')
+            const id = uuidv4()
             state.supports = [...state.supports, {
                 ...action.payload,
-                id: uuidv4()
+                id: id
             }
             ];
-            console.log(state.supports)
+            state.lastId = id
         }),
         update: create.reducer((state, action: PayloadAction<SupportType>) => {
             state.supports = [...state.supports.filter(support => support.id !== action.payload.id),
@@ -35,16 +36,20 @@ export const supportSlice = createAppSlice({
         }),
         deleteSupport: create.reducer((state, action: PayloadAction<string>) => {
             state.supports = state.supports.filter(support => support.id !== action.payload)
+        }),
+        clearLastId: create.reducer((state) => {
+            state.lastId = undefined
         })
     }),
     selectors: {
         selectSupport: (support) => support.supports,
         selectStatus: (support) => support.status,
+        selectLastId: (support) => support.lastId,
     },
 });
 
-export const { create, update, deleteSupport } =
+export const { create, update, deleteSupport, clearLastId } =
     supportSlice.actions;
 
-export const { selectSupport, selectStatus } = supportSlice.selectors;
+export const { selectSupport, selectStatus, selectLastId } = supportSlice.selectors;
 export default supportSlice.reducer
