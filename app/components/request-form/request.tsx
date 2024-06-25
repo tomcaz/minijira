@@ -9,6 +9,8 @@ import { Alert, Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/navigation'
+
 
 interface IFormInput {
   fullName: string
@@ -20,6 +22,7 @@ interface IFormInput {
 
 const RequestForm = () => {
 
+  const router = useRouter()
   const { control, register, handleSubmit,
     formState: { errors }, setValue, reset, resetField } = useForm<IFormInput>()
   const dispatch = useAppDispatch()
@@ -32,7 +35,8 @@ const RequestForm = () => {
       tags: data.tag as TagsType[],
       stepsToReporduce: data.steps.map(step => ({ id: uuidv4(), step }))
     }))
-    console.log(fields.length)
+
+    router.push('/success')
     for (let index = 0; index < fields.length; index += 1) {
       remove(index)
     }
@@ -41,7 +45,7 @@ const RequestForm = () => {
     }
     reset();
     console.log(fields.length)
-    
+
     resetField('steps')
     console.log(fields)
   }
