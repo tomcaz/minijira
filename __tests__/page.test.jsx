@@ -4,6 +4,18 @@ import { Provider } from 'react-redux';
 import IndexPage from '../app/page'
 import { makeStore } from '../lib/store'
 
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    events: {
+      on: jest.fn(),
+      off: jest.fn(),
+      emit: jest.fn(),
+    },
+    isFallback: false,
+  }),
+}));
+
 const renderView = async () => {
 
   const initialState = { supports: [] };
