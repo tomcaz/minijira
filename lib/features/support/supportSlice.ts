@@ -47,4 +47,4 @@ export const { create, update, deleteSupport } =
     supportSlice.actions;
 
 export const { selectSupport, selectStatus } = supportSlice.selectors;
-
+export default supportSlice.reducer
