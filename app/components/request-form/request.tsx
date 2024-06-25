@@ -107,7 +107,7 @@ const RequestForm = () => {
                         required: true
                       })}>
                         {['Bug Report', 'Feature Request', 'General Inquiry'].map((type) => (
-                          <option value={type}>{type}</option>
+                          <option value={type} key={type}>{type}</option>
                         ))}
                       </Form.Select>
                     </div>
